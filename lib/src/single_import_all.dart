@@ -30,6 +30,10 @@ void generateImportsForAllFiles(String targetPath, String filename) {
   for (var entity in fileList) {
     if (entity is File &&
         entity.path.endsWith('.dart') &&
+        !entity.path.endsWith('.freezed.dart') &&
+        !entity.path.endsWith('.g.dart') &&
+        !entity.path.endsWith('.chopper.dart') &&
+        !entity.path.endsWith('.gr.dart') &&
         !entity.path.endsWith('$filename.barrel.dart')) {
       final relativePath = entity.path.substring(directory.path.length + 1);
       final exportStatement = "export './$relativePath';";

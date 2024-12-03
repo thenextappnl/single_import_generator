@@ -4,7 +4,7 @@ void main(List<String> arguments) {
   void _alertMessage() {
     print('Please provide the target path and option.');
     print(
-        'Create Barrier Export : dart run single_import_generator -target=<path> <option>');
+        'Create Barrier Export : dart run single_import_generator -target=<path> <filename> <option>');
     print(
         'Create Annotation Export : dart run single_import_generator -path=<path>');
     return;
@@ -25,17 +25,19 @@ void main(List<String> arguments) {
 
   try {
     final targetPath = arguments[0].substring('-target='.length);
-    final optionArg = arguments[1];
+    final filename = arguments[1];
+    final optionArg = arguments[2];
 
     if (optionArg == 'all') {
-      generateImportsForAllFiles(targetPath);
+      generateImportsForAllFiles(targetPath, filename);
     } else if (optionArg == 'dir') {
-      generateImportsForDirectory(targetPath);
+      generateImportsForDirectory(targetPath, filename);
     } else {
       print('Invalid option. Please use "all" or "dir".');
       return;
     }
   } catch (e) {
+    print(e);
     _alertMessage();
   }
 }
